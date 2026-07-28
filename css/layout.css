@@ -1,8 +1,53 @@
-.hero img{
-    max-width:100%;
+
+header .content{
+display: flex;
+flex-direction: row;
+align-items: end;
+justify-content: space-between;
+padding:10px;
 }
 
+.logo{
+    margin-bottom:-10px;
+}
 
+.logo img{
+    max-width:200px;
+}
+
+.searchbar-box{
+    border:1px solid #fff;
+    width:fit-content;
+    border-radius:20px;
+    box-shadow:0 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding:0px 10px;
+    height: 55px;
+}
+.searchbar-box input{
+background:transparent;
+box-shadow:none;
+border:none;
+Color:#fff;
+font-size: 14px;
+
+}
+
+.searchbar-box button{
+    background:transparent;
+    border:0px;
+    box-shadow:0px;
+}
+
+.searchbar-box img{
+    max-width:33px;
+}
+
+.hero img{
+    max-width:90%;
+}
 
 /* #region Card */
 
@@ -11,6 +56,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .card-box{
@@ -23,6 +69,7 @@
     padding:25px;
     display:flex;
     flex-direction: column;
+    
     margin:10px;
 }
 
@@ -97,3 +144,44 @@
 /* #endregion Card Colors */
 
 /*#endregion Card*/
+
+
+/* #region Dialog */
+.dialog-box{
+    display: inline-block;
+    height:870px;
+    width:320px;
+}
+
+/* #endregion */
+
+
+
+
+
+/* #region Responsive */
+@media only screen and (max-width: 480px) {
+
+    header .content{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .searchbar-box{
+        width:100%;
+        margin-bottom:20px;
+    }
+
+    .logo{
+        margin:10px 0px;
+    }
+
+    .hero{
+        display: none;
+    }
+
+    .card-box{
+        margin:10px 0px;
+    }
+}
+
+/* #endregion */
