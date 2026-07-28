@@ -1,0 +1,53 @@
+:root {
+
+--primary-color:#354752;
+
+  /* Aqua */
+  --aqua-primary: rgb(86, 111, 151);
+  --aqua-secondary: rgb(144, 195, 209);
+  --aqua-gradient: linear-gradient(
+    90deg,
+    var(--aqua-primary) 0%,
+    #9ac3c4 50%,
+    var(--aqua-secondary) 100%
+  );
+
+  /* Fire */
+  --fire-primary: rgb(223, 69, 69);
+  --fire-secondary: rgb(239, 148, 72);
+  --fire-gradient: linear-gradient(
+    90deg,
+    var(--fire-primary) 0%,
+    var(--fire-secondary) 100%
+  );
+
+  /* Grass */
+  --grass-primary: rgb(96, 133, 116);
+  --grass-secondary: rgb(134, 188, 109);
+  --grass-gradient: linear-gradient(
+    90deg,
+    var(--grass-primary) 0%,
+    #9ac3c4 50%,
+    var(--grass-secondary) 100%
+  );
+
+  /* Stone */
+  --stone-primary: rgb(84, 80, 78);
+  --stone-secondary: rgb(178, 175, 167);
+  --stone-gradient: linear-gradient(
+    90deg,
+    var(--stone-primary) 0%,
+    #9ac3c4 50%,
+    var(--stone-secondary) 100%
+  );
+
+  /* Electric */
+  --electric-primary: rgb(236, 183, 92);
+  --electric-secondary: rgb(207, 100, 80);
+  --electric-gradient: linear-gradient(
+    90deg,
+    var(--electric-primary) 0%,
+    #9ac3c4 50%,
+    var(--electric-secondary) 100%
+  );
+}
