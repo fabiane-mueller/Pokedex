@@ -11,9 +11,15 @@ const pokemonUrl =
   pokemonLimit +
   pokemonOffsetPath +
   pokemonOffset;
-console.log(pokemonUrl);
 
+
+  function init(){
 catchThemAll(pokemonLimit);
+  }
+    
+
+
+
 
 async function catchThemAll(path = "") {
   let response = await fetch(pokemonUrl);
@@ -22,6 +28,13 @@ async function catchThemAll(path = "") {
   const pokemonData = responseToJson.results;
   renderPokemon(pokemonData);
 }
+
+
+
+
+
+
+
 
 function renderPokemon(pokemonData) {
   let pokemon = pokemonData;
@@ -38,7 +51,7 @@ function renderPokemon(pokemonData) {
                     <div class="card-header">
                         <h3 id="cardPokemonName" class="card-title">${singlePokemon.name}</h3>
                         <ul class="type-box">
-                            <li class="type">${abiltiesFirst}</li>
+                            <li class="type"></li>
                             <li class="type">Poison</li>
                         </ul>
                     </div>
@@ -52,28 +65,23 @@ function renderPokemon(pokemonData) {
                     </div>
                 </button>
   `;
-
-    catchPokemonDetails(pokemonIndex, singlePokemon);
+catchPokemonDetails(pokemonIndex, singlePokemon);
   }
 }
 
+
 async function catchPokemonDetails(pokemonIndex, singlePokemon) {
   const pokemonDetailUrl = singlePokemon.url;
-  console.log(pokemonDetailUrl);
 
   const response = await fetch(pokemonDetailUrl);
   let responseToJson = await response.json();
+  let abilitiesOne = responseToJson.abilities[0].ability.name;
+  let abilitiesTwo = responseToJson.abilities[1].ability.name;
+  let abilities = [];
+  abilities.push(abilitiesOne, abilitiesTwo);
+  console.log(abilities);
   
-  catchGroups(responseToJson);
-  // console.log(detailsData);
-}
-
-function catchGroups(responseToJson){
-  const abiltiesFirst = [responseToJson.abilities[0].ability.name];
-renderPokemon(abiltiesFirst);
-
-  console.log(responseToJson.abilities[0].ability.name);
-
+  
 }
 
 
