@@ -161,41 +161,38 @@
     rgba(207, 100, 80, 0.2) 100%
   );
 
+  .fire-dialog {
+    --primary-color: var(--fire-primary);
+    --secondary-color: var(--fire-secondary);
+    --gradient: var(--fire-gradient);
+    --gradient-light: var(--fire-gradient-light);
+  }
 
-.fire-dialog {
-  --primary-color: var(--fire-primary);
-  --secondary-color: var(--fire-secondary);
-  --gradient: var(--fire-gradient);
-  --gradient-light: var(--fire-gradient-light);
-}
+  .grass-dialog {
+    --primary-color: var(--grass-primary);
+    --secondary-color: var(--grass-secondary);
+    --gradient: var(--grass-gradient);
+    --gradient-light: var(--grass-gradient-light);
+  }
 
-.grass-dialog {
-  --primary-color: var(--grass-primary);
-  --secondary-color: var(--grass-secondary);
-  --gradient: var(--grass-gradient);
-  --gradient-light: var(--grass-gradient-light);
-}
+  .aqua-dialog {
+    --primary-color: var(--aqua-primary);
+    --secondary-color: var(--aqua-secondary);
+    --gradient: var(--aqua-gradient);
+    --gradient-light: var(--aqua-gradient-light);
+  }
 
-.aqua-dialog {
-  --primary-color: var(--aqua-primary);
-  --secondary-color: var(--aqua-secondary);
-  --gradient: var(--aqua-gradient);
-  --gradient-light: var(--aqua-gradient-light);
-}
+  .stone-dialog {
+    --primary-color: var(--stone-primary);
+    --secondary-color: var(--stone-secondary);
+    --gradient: var(--stone-gradient);
+    --gradient-light: var(--stone-gradient-light);
+  }
 
-.stone-dialog {
-  --primary-color: var(--stone-primary);
-  --secondary-color: var(--stone-secondary);
-  --gradient: var(--stone-gradient);
-  --gradient-light: var(--stone-gradient-light);
-}
-
-.electric-dialog {
-  --primary-color: var(--electric-primary);
-  --secondary-color: var(--electric-secondary);
-  --gradient: var(--electric-gradient);
-  --gradient-light: var(--electric-gradient-light);
-}
-
-
+  .electric-dialog {
+    --primary-color: var(--electric-primary);
+    --secondary-color: var(--electric-secondary);
+    --gradient: var(--electric-gradient);
+    --gradient-light: var(--electric-gradient-light);
+  }
 }

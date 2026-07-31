@@ -130,7 +130,7 @@ font-size: 14px;
 
 /* #endregion Card Colors */
 
-/*#endregion Card*/
+/* #endregion Card*/
 
 
 /* #region Dialog */
@@ -269,7 +269,7 @@ padding:10px;
 }
 
 .star-box{
-    background:url(../assets/img/abilities-bg.png) no-repeat center center / cover;
+    background:url("../assets/img/abilities-bg.png") no-repeat center center / cover;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -394,10 +394,10 @@ font-weight:500;
 
 /* #region Dialog Backgrounds */
 .dialog-box.grass-dialog{background:url(../assets/img/grass-background.png) no-repeat center center / cover;}
-.dialog-box.fire-dialog{background:url(../assets/img/fire-background.png) no-repeat center center / cover;}
-.dialog-box.stone-dialog{background:url(../assets/img/stone-background.png) no-repeat center center / cover;}
-.dialog-box.aqua-dialog{background:url(../assets/img/aqua-background.png) no-repeat center center / cover;}
-.dialog-box.electric-dialog{background:url(../assets/img/electric-background.png) no-repeat center center / cover;}
+.dialog-box.fire-dialog{background:url("../assets/img/fire-background.png") no-repeat center center / cover;}
+.dialog-box.stone-dialog{background:url("../assets/img/stone-background.png") no-repeat center center / cover;}
+.dialog-box.aqua-dialog{background:url("../assets/img/aqua-background.png") no-repeat center center / cover;}
+.dialog-box.electric-dialog{background:url("../assets/img/electric-background.png") no-repeat center center / cover;}
 /* #endregion Dialog Backgrounds */
 
 

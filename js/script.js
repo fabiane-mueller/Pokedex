@@ -1,3 +1,84 @@
+const pokemonBaseUrl = "https://pokeapi.co/api/v2/pokemon";
+const pokemonLimitPath = "?limit=";
+const pokemonLimit = "12";
+const pokemonOffsetPath = "&offset=";
+const pokemonOffset = "0";
+const pokemonImagePath =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
+const pokemonUrl =
+  pokemonBaseUrl +
+  pokemonLimitPath +
+  pokemonLimit +
+  pokemonOffsetPath +
+  pokemonOffset;
+console.log(pokemonUrl);
+
+catchThemAll(pokemonLimit);
+
+async function catchThemAll(path = "") {
+  let response = await fetch(pokemonUrl);
+
+  let responseToJson = await response.json();
+  const pokemonData = responseToJson.results;
+  renderPokemon(pokemonData);
+}
+
+function renderPokemon(pokemonData) {
+  let pokemon = pokemonData;
+  console.log(pokemon);
+
+  const cardRef = document.getElementById("cards");
+
+  for (let i = 0; i < pokemon.length; i++) {
+    const pokemonIndex = i + 1;
+    const singlePokemon = pokemon[i];
+    const pokemonImage = pokemonImagePath + pokemonIndex + ".png";
+    cardRef.innerHTML += /*html*/ `
+    <button id="card${-[i]}" class="card-box grass-card" aria-haspopup="dialog" type="button" tabindex="0">
+                    <div class="card-header">
+                        <h3 id="cardPokemonName" class="card-title">${singlePokemon.name}</h3>
+                        <ul class="type-box">
+                            <li class="type">${abiltiesFirst}</li>
+                            <li class="type">Poison</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-number" id="pokemonCardNumber">
+                            <p>${singlePokemon.id}</p>
+                        </div>
+                        <div class="card-image" id="pokemonCardImage">
+                            <img src="${pokemonImage}" alt="Pokemon: ${singlePokemon.name}">
+                        </div>
+                    </div>
+                </button>
+  `;
+
+    catchPokemonDetails(pokemonIndex, singlePokemon);
+  }
+}
+
+async function catchPokemonDetails(pokemonIndex, singlePokemon) {
+  const pokemonDetailUrl = singlePokemon.url;
+  console.log(pokemonDetailUrl);
+
+  const response = await fetch(pokemonDetailUrl);
+  let responseToJson = await response.json();
+  
+  catchGroups(responseToJson);
+  // console.log(detailsData);
+}
+
+function catchGroups(responseToJson){
+  const abiltiesFirst = [responseToJson.abilities[0].ability.name];
+renderPokemon(abiltiesFirst);
+
+  console.log(responseToJson.abilities[0].ability.name);
+
+}
+
+
+
+
 function openDialogTab(tab) {
   let i;
   const dialogNavRef = document.getElementsByClassName("dialogTab");
@@ -6,7 +87,4 @@ function openDialogTab(tab) {
   }
   const dialogContentRef = document.getElementById(tab);
   dialogContentRef.style.display = "block";
-
-
-
 }
