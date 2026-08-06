@@ -1,7 +1,7 @@
 function getcardHtml(pokemonList,i,pokemonIndex){
 
     return `
-     <button id="card${i}" class="card-box" aria-haspopup="dialog" type="button" tabindex="0" onclick="openDialog(${i})">
+     <button data-id="card" id="card${i}" class="card-box" aria-haspopup="dialog" type="button" tabindex="0" onclick="openDialog(${i})">
                     <div class="card-header">
                         <h3 id="cardPokemonName${i}" class="card-title">${pokemonList[i].name}</h3>
                         <ul class="type-box" id="type">
@@ -13,7 +13,7 @@ function getcardHtml(pokemonList,i,pokemonIndex){
                             <p>${pokemonList[i].id}</p>
                         </div>
                         <div class="card-image" id="pokemonCardImage">
-                            <img src="${pokemonImagePath + pokemonIndex + ".png"}" alt="Pokemon:${pokemonList[i].name}">
+                            <img data-id="card-image" src="${pokemonImagePath + pokemonIndex + ".png"}" alt="Pokemon:${pokemonList[i].name}">
                         </div>
                     </div>
                 </button>
@@ -23,12 +23,13 @@ function getcardHtml(pokemonList,i,pokemonIndex){
 function getDialogHtml(i){
     const pokemonIndex = i + 1;
     return /*html*/`
+        
         <div class="dialog-head">
-                    <button onclick="closeDialog()" class="back-btn" id="backToAllButton"><img src="./assets/icons/back-arrow.png"
+                    <button role=”button” data-id="close-dialog-button" onclick="closeDialog()" class="back-btn" id="backToAllButton"><img src="./assets/icons/back-arrow.png"
                             alt="Back Arrow"></button>
                 </div>
                 <div class="dialog-header">
-                    <h3 id="dialogPokemonName" class="dialog-title">${pokemonList[i].name}</h3>
+                    <h3 id="dialogPokemonName"  class="dialog-title">${pokemonList[i].name}</h3>
                     <ul class="type-box" id="type">
                             ${getTypesHtml(pokemonList[i].types)}
                     </ul>
@@ -36,7 +37,7 @@ function getDialogHtml(i){
                 <div class="dialog-hero">
                     <button class="sound-btn" id="pokemonCry"><img src="./assets/icons/grass-cry-button.png"
                             alt="Sound Icon"></button>
-                            <img src="${pokemonImagePath + pokemonIndex + ".png"}" alt="Pokemon:${pokemonList[i].name}"  id="pokemonDialogImage" class="dialog-image">
+                            <img data-id="dialog-image" src="${pokemonImagePath + pokemonIndex + ".png"}" alt="Pokemon:${pokemonList[i].name}"  id="pokemonDialogImage" class="dialog-image">
                 </div>
                 <div class="dialog-content">
                     <div class="dialog-navigation">
@@ -112,10 +113,11 @@ function getDialogHtml(i){
 
                 <div class="dialog-bottom-nav" id="dialogBottomNav">
                     <ul>
-                        <li><button><img src="./assets/icons/prev-btn.png" alt="Previous Icon"></button></li>
-                        <li><button onclick="nextPokemon(i)"><img src="./assets/icons/next-btn.png" alt="Next Icon"></button></li>
+                        <li><button data-id="prev-button" onclick="prePokemon(${i})"><img src="./assets/icons/prev-btn.png" alt="Previous Icon"></button></li>
+                        <li><button data-id="next-button" onclick="nextPokemon(${i})"><img src="./assets/icons/next-btn.png" alt="Next Icon"></button></li>
                     </ul>
                 </div>
+            
     `
 }
 
