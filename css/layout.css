@@ -57,6 +57,7 @@ font-size: 14px;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    
 }
 
 .card-box{
@@ -72,6 +73,7 @@ font-size: 14px;
     min-height: 336px;
     margin:10px;
     transition:all 0.2s ease-in-out;
+    position: relative;
 }
 
 .card-box:hover{
@@ -100,6 +102,9 @@ font-size: 14px;
 }
 .card-number {
     width:40%;
+    position: absolute;
+    bottom:20px;
+    left:0px;
 }
 .card-number p{
     font-size: 64px;
@@ -240,20 +245,17 @@ font-size: 14px;
 }
 
 .dialog-box{
-    width:320px;
+    width:clamp(320px, 80vw,400px);
     border-radius:40px;
     border:1px solid rgba(255,255,255, 0.2);
     box-shadow:
     0 6px 24px rgba(0, 0, 0, 0.25),
     inset 0 1px 6px rgba(255, 255, 255, 0.25);
     padding:25px 15px;
-    transform:0.7;
     transition:all 0.5s;
     margin:auto;
 }
-dialog.opened {
-  transform: scale(1);
-}
+
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.3);
@@ -292,18 +294,25 @@ dialog.opened::backdrop {
     display: flex;
     flex-direction:row;
     align-items: flex-end;
-    margin-top:30px;
+    justify-content: space-between;
 }
 
 .sound-btn{
     background: transparent;
     border: 0px;
     cursor: pointer;
-    width:10%;
+    width:12%;
+    margin: 5px 0px;
+}
+
+.sound-btn img{
+    max-width: 100%;
 }
 .dialog-image{
-    width:90%;
+    margin-top:-50px;
+    max-height:200px;
     margin-bottom: -25px;
+    z-index:99;
 }
 
 .dialog-content{
@@ -351,7 +360,7 @@ padding:10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap:16px;
+    gap:7px;
 }
 
 .basic-box{
@@ -616,6 +625,17 @@ margin:20px 0px;
     .basic-content p{
     font-size:16px;
 }
+.dialog-image{
+    width: 50%;
 }
+}
+
+@media only screen and (max-width: 360px) {
+ .basic-box{
+    padding: 4px;
+ }   
+}
+
+
 
 /* #endregion */

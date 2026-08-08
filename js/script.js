@@ -13,21 +13,31 @@ const pokemonUrl =
   pokemonOffset;
 let pokemonList = [];
 let filteredPokemon = [];
+const dialogRef = document.getElementById("dialog");
 
+dialogRef.addEventListener("click", (event) => {
+  if (event.target === dialogRef) {
+    closeDialog();
+  }
+});
 
 async function init() {
   await catchBase();
 }
 
-
 async function catchBase() {
+  const pokemonUrl =
+    pokemonBaseUrl +
+    pokemonLimitPath +
+    pokemonLimit +
+    pokemonOffsetPath +
+    pokemonOffset;
   let response = await fetch(pokemonUrl);
   let responseToJson = await response.json();
   let baseResults = responseToJson.results;
   showLoadingSpinner();
   catchDetails(baseResults);
 }
-
 
 async function catchDetails(baseResults) {
   for (let i = 0; i < baseResults.length; i++) {
@@ -40,26 +50,33 @@ async function catchDetails(baseResults) {
     pokemon.id = responseToJson.id;
     pokemon.height = responseToJson.height;
     pokemon.weight = responseToJson.weight;
-    catchTypes(responseToJson, i, pokemon);
-    catchStats(responseToJson, i, pokemon);
-    catchSpecies(responseToJson, pokemon);
-    catchAbilities(responseToJson, i, pokemon);
+    catchAll(responseToJson, pokemon);
     pokemonList.push(pokemon);
   }
   disableLoadingSpinner();
   renderPokemon();
 }
 
+function catchAll(responseToJson, pokemon) {
+  catchTypes(responseToJson, pokemon);
+  catchStats(responseToJson, pokemon);
+  catchSpecies(responseToJson, pokemon);
+  catchAbilities(responseToJson, pokemon);
+  catchCries(responseToJson, pokemon);
+}
 
-function catchAbilities(responseToJson, i, pokemon) {
+function catchCries(responseToJson, pokemon) {
+  pokemon.cry = responseToJson.cries.latest;
+}
+
+function catchAbilities(responseToJson, pokemon) {
   pokemon.abilities = [];
   for (let i = 0; i < responseToJson.abilities.length; i++) {
     pokemon.abilities.push(responseToJson.abilities[i].ability.name);
   }
 }
 
-
-function catchTypes(responseToJson, i, pokemon) {
+function catchTypes(responseToJson, pokemon) {
   pokemon.types = [];
   pokemon.types = responseToJson.types;
   pokemon.types = [];
@@ -68,8 +85,7 @@ function catchTypes(responseToJson, i, pokemon) {
   }
 }
 
-
-function catchStats(responseToJson, i, pokemon) {
+function catchStats(responseToJson, pokemon) {
   pokemon.stats = [];
 
   for (let i = 0; i < responseToJson.stats.length; i++) {
@@ -80,7 +96,6 @@ function catchStats(responseToJson, i, pokemon) {
   }
 }
 
-
 async function catchSpecies(responseToJson, pokemon) {
   let speciesUrl = responseToJson.species.url;
   let response = await fetch(speciesUrl);
@@ -90,7 +105,6 @@ async function catchSpecies(responseToJson, pokemon) {
     pokemon.eggGroup.push(responseToJsonSpecies.egg_groups[i].name);
   }
 }
-
 
 function backgrounds(pokemon, i) {
   const background = document.getElementById(`card${i}`);
@@ -115,7 +129,6 @@ function backgrounds(pokemon, i) {
   }
 }
 
-
 function renderPokemon() {
   const cardRef = document.getElementById("cards");
   cardRef.innerHTML = "";
@@ -136,28 +149,28 @@ function renderPokemon() {
   }
 }
 
-
-const dialogRef = document.getElementById("dialog");
-
 function openDialog(i) {
   document.body.style.overflow = "hidden";
   dialogRef.showModal();
   renderDialog(i);
 }
 
-
 function renderDialog(i) {
   backgroundImage(i);
 
-  dialog.innerHTML = getDialogHtml(i);
-}
+  let currentList = pokemonList;
 
+  if (filteredPokemon.length > 0) {
+    currentList = filteredPokemon;
+  }
+
+  dialog.innerHTML = getDialogHtml(currentList, i);
+}
 
 function closeDialog() {
   document.body.style.overflow = "auto";
   dialogRef.close();
 }
-
 
 function backgroundImage(i) {
   const cls = [
@@ -193,7 +206,6 @@ function backgroundImage(i) {
   }
 }
 
-
 function nextPokemon(i) {
   if (i + 1 < pokemonList.length) {
     i++;
@@ -204,27 +216,20 @@ function nextPokemon(i) {
   renderDialog(i);
 }
 
-
 function prePokemon(i) {
-    if(i === 0){
-     i= pokemonList.length -1;
-  }
-  else{
+  if (i === 0) {
+    i = pokemonList.length - 1;
+  } else {
     i--;
   }
 
   renderDialog(i);
 }
 
-
-function loadMore() {
-  pokemonLimit += 20;
+async function loadMore() {
   pokemonOffset += 20;
-  showLoadingSpinner();
-  renderPokemon();
-  disableLoadingSpinner();
+  await catchBase();
 }
-
 
 function openDialogTab(tab) {
   let i;
@@ -236,52 +241,38 @@ function openDialogTab(tab) {
   dialogContentRef.style.display = "block";
 }
 
-
-async function showLoadingSpinner(){
-const loadingBtn = document.querySelector(".loading-ani");
-loadingBtn.style.display="block";
-
-};
-
-
-function disableLoadingSpinner(){
-const loadingBtn = document.querySelector(".loading-ani");
-loadingBtn.style.display="none";
+async function showLoadingSpinner() {
+  const loadingBtn = document.querySelector(".loading-ani");
+  loadingBtn.style.display = "block";
 }
 
+function disableLoadingSpinner() {
+  const loadingBtn = document.querySelector(".loading-ani");
+  loadingBtn.style.display = "none";
+}
 
 function filterAndShowNames() {
-    const filterWord = document.getElementById("searchbar").value.toLowerCase();
-if(filterWord.length >= 3){
-
-    filteredPokemon = pokemonList.filter(pokemon =>
-        pokemon.name.includes(filterWord)
+  const filterWord = document.getElementById("searchbar").value.toLowerCase();
+  if (filterWord.length >= 3) {
+    filteredPokemon = pokemonList.filter((pokemon) =>
+      pokemon.name.includes(filterWord),
     );
 
     console.log(filteredPokemon);
     renderPokemon();
-}
-else {
-  const cardRef = document.getElementById("cards");
-  cardRef.innerHTML=/*html*/`
+  } else {
+    const cardRef = document.getElementById("cards");
+    cardRef.innerHTML = /*html*/ `
     <h3>Keine Pokemon gefunden</h3>
     <button class="loadmore" onclick="renderPokemon()" data-id="load-more-button">
                     
                     <p class="more">neu laden</p>
                 </button>
-  `
+  `;
+  }
 }
+
+function playCry(i) {
+  const audio = new Audio(pokemonList[i].cry);
+  audio.play();
 }
-
-
-// function logUp(){
-//  dialogRef.close();
-//   console.log("test");
-// }
-
-
-// function BProtection(event){
-//  event.stopPropagation();
-// }
-
-
