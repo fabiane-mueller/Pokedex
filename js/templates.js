@@ -1,7 +1,6 @@
-function getcardHtml(pokemonList,i,pokemonIndex){
-
-    return `
-     <button data-id="card" id="card${i}" class="card-box" aria-haspopup="dialog" type="button" tabindex="0" onclick="openDialog(${i})">
+function getcardHtml(pokemonList, i, pokemonIndex) {
+  return `
+     <button data-id="card"  id="card${i}" class="card-box" aria-haspopup="dialog" type="button" tabindex="0" onclick="openDialog(${i})">
                     <div class="card-header">
                         <h3 id="cardPokemonName${i}" class="card-title">${pokemonList[i].name}</h3>
                         <ul class="type-box" id="type">
@@ -17,12 +16,12 @@ function getcardHtml(pokemonList,i,pokemonIndex){
                         </div>
                     </div>
                 </button>
-    `
+    `;
 }
 
-function getDialogHtml(i){
-    const pokemonIndex = i + 1;
-    return /*html*/`
+function getDialogHtml(pokemonList, i) {
+  const pokemonIndex = pokemonList[i].id;
+  return /*html*/ `
         
         <div class="dialog-head">
                     <button role=”button” data-id="close-dialog-button" onclick="closeDialog()" class="back-btn" id="backToAllButton"><img src="./assets/icons/back-arrow.png"
@@ -35,7 +34,7 @@ function getDialogHtml(i){
                     </ul>
                 </div>
                 <div class="dialog-hero">
-                    <button class="sound-btn" id="pokemonCry"><img src="./assets/icons/grass-cry-button.png"
+                    <button onclick="playCry(${i})"class="sound-btn" id="pokemonCry"><img src="./assets/icons/grass-cry-button.png"
                             alt="Sound Icon"></button>
                             <img data-id="dialog-image" src="${pokemonImagePath + pokemonIndex + ".png"}" alt="Pokemon:${pokemonList[i].name}"  id="pokemonDialogImage" class="dialog-image">
                 </div>
@@ -118,39 +117,34 @@ function getDialogHtml(i){
                     </ul>
                 </div>
             
-    `
+    `;
 }
-
-
-
 
 function getTypesHtml(types) {
-    let html = "";
+  let html = "";
 
-    for (let i = 0; i < types.length; i++) {
-        html += /*html*/`
+  for (let i = 0; i < types.length; i++) {
+    html += /*html*/ `
             <li class="type">${types[i]}</li>
         `;
-    }
-    return html;
+  }
+  return html;
 }
 
-
-function getAbilitiesHtml(abilities){
-    let html = "";
-    for (let i = 0; i < abilities.length; i++) {
-        html += /*html*/`
+function getAbilitiesHtml(abilities) {
+  let html = "";
+  for (let i = 0; i < abilities.length; i++) {
+    html += /*html*/ `
             <li>${abilities[i]}</li>
         `;
-    }
-    return html;
+  }
+  return html;
 }
 
-
-function getStatsHtml(stats){
-    let html = "";
-    for (let i = 0; i < stats.length; i++) {
-        html += /*html*/`
+function getStatsHtml(stats) {
+  let html = "";
+  for (let i = 0; i < stats.length; i++) {
+    html += /*html*/ `
         <div class="stats-item">
             <label for="file">${stats[i].name}</label>
             <span class="stat-value">${stats[i].value}</span>
@@ -158,8 +152,7 @@ function getStatsHtml(stats){
                 <div class="stat-fill" style="width:${stats[i].value}%"></div>
             </div>
         </div>
-        `
-        
-    }
-    return html;
+        `;
+  }
+  return html;
 }
